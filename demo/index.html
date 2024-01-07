@@ -182,7 +182,7 @@
   //initializing input element/s
   $('#txt,#txt1').initTimeInput();
 
-  //adding custom event for error messages
+  //binding custom event for error messages
   $('#txt').on('invalidTime', function (event) {
     console.log('Invalid time event triggered:', event.detail.message);
   });
