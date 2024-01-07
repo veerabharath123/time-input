@@ -68,7 +68,7 @@
 
       //function for handling backspace to delete number and replace with dash, skips the colon
       let HandleBackSpace = (element,event) => {
-        if(event.ctrlKey) $(element).val('__:__').focus();
+        if(event.ctrlKey||event.metaKey) $(element).val('__:__').focus();
         else{
           const positions = { start: element.selectionStart, end: element.selectionEnd };
           if (positions.start === positions.end) {
