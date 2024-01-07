@@ -32,7 +32,7 @@
         element.setSelectionRange(newpos + 1, newpos + 1);
       };
 
-      //function for handling left or right arrows to move cursor and skips the colon
+      //function for handling left and right arrows to move cursor and skips the colon
       let HandleArrows = (element,pos,event) => {
         const newpos = (() => {
           switch (event.which) {
@@ -44,7 +44,7 @@
         element.setSelectionRange(newpos, newpos);
       }
 
-      //function for handling backspace and skips the colon
+      //function for handling backspace to delete number and replace with dash, skips the colon
       let HandleBackSpace = (element) => {
         const positions = { start: element.selectionStart, end: element.selectionEnd };
         if (positions.start === positions.end) {
