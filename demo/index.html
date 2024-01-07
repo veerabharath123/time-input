@@ -145,14 +145,7 @@
         return match ? match[0] : alternate;
       }
 
-      //css properties for html input
-      let css = {
-        'letter-spacing':'5px',
-        'text-align': 'center',
-        'width':'100px'
-      }
-
-      //adding max-length attribute and css to input field 
+      //adding max-length attribute
       $(this).attr('max-length',5).css(css)
 
       //initial validation
