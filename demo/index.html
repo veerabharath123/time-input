@@ -35,6 +35,7 @@
 
   //#region initTimeInput
   (function ($) {
+    const defaultValue = '__:__';
     //adding this function into jquery objects
     $.fn.initTimeInput = function () {
       //replaces the character at specific index for given string
@@ -68,7 +69,7 @@
 
       //function for handling backspace to delete number and replace with dash, skips the colon
       let HandleBackSpace = (element,event) => {
-        if(event.ctrlKey||event.metaKey) $(element).val('__:__').focus();
+        if(event.ctrlKey||event.metaKey) $(element).val(defaultValue).focus();
         else{
           const positions = { start: element.selectionStart, end: element.selectionEnd };
           if (positions.start === positions.end) {
@@ -129,11 +130,11 @@
           let [hours, minutes] = value.split(':').map(Number);
           let maxHours = parseInt($(element).data('maxhours')) || 24;
           if (hours >= maxHours && minutes > 0) {
-            $(element).val('__:__').focus();
+            $(element).val(defaultValue).focus();
             valid = false
           }
         } else if(pattern.test(value)){
-          $(element).val('__:__').focus();
+          $(element).val(defaultValue).focus();
           valid = false
         }
         return valid
@@ -152,7 +153,11 @@
       validateHours(this);
 
       //looping array of elements to initialize each input element in the array
-      return this.each(function () {      
+      return this.each(function () {
+
+        //checks and initailize with default value
+        $(this).val(getMatchValue($(this).val(),defaultValue))
+
         //binding events
         $(this).on({
           'keydown':function(e){ 
@@ -167,7 +172,7 @@
             clipboardData = e.originalEvent?.clipboardData || e.clipboardData || window.clipboardData;
             if(e.type == 'paste'){
               const value = clipboardData?.getData('text') || '';
-              $(this).val(getMatchValue(value,'__:__')).focus();
+              $(this).val(getMatchValue(value,defaultValue)).focus();
             } else if(e.type == 'copy'){
               const selectedText = window.getSelection().toString().replace(/\u200B/g, "");
               const extractedText = getMatchValue(selectedText,'');
