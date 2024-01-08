@@ -146,17 +146,17 @@
       }
 
       //adding max-length attribute
-      $(this).attr('max-length',5).css(css)
+      $(this).attr('max-length',5);
 
       //initial validation
-      validateHours(this)
+      validateHours(this);
 
       //looping array of elements to initialize each input element in the array
       return this.each(function () {      
         //binding events
         $(this).on({
           'keydown':function(e){ 
-            HandleInput(this,e)
+            HandleInput(this,e);
           },
           'focus':function(e){
             this.setSelectionRange(0, 0);
@@ -170,12 +170,12 @@
               $(this).val(getMatchValue(value,'__:__')).focus();
             } else if(e.type == 'copy'){
               const selectedText = window.getSelection().toString().replace(/\u200B/g, "");
-              const extractedText = getMatchValue(selectedText,'')
+              const extractedText = getMatchValue(selectedText,'');
               clipboardData.setData('text/html', extractedText);
-              if(extractedText) return
+              if(extractedText) return;
             }
-            e.stopPropagation()
-            e.preventDefault()
+            e.stopPropagation();
+            e.preventDefault();
           },
 
           //When input is out of focus this function validates input values and create a custom event 'invalidTime' for further customization
@@ -204,7 +204,7 @@
 
   //binding custom event for error messages
   $('.time-input').on('invalidTime', function (event) {
-    alert('Invalid time event triggered: \n'+event.detail.message)
+    alert('Invalid time event triggered: \n'+event.detail.message);
     console.log('Invalid time event triggered:', event.detail.message);
   });
 </script>
