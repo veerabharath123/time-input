@@ -54,7 +54,6 @@
       }
 
       let HandleInput = (element, event) => {
-        debugger
         const { isArrow, isBackspace, isNumber ,isCopyPaste , isSelectAll , isRestrictedKey,isTab} = keysAllowed(event);
         if(isCopyPaste || isSelectAll || isTab) return true
         const pos = element.selectionStart;
