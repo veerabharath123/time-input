@@ -21,7 +21,7 @@
 <div class="container-fluid mx-2 my-3 w-75">
   <h2>Time Input</h2>
 
-  <!-- inputs elements for time fields  -->
+  <!-- input elements for time fields  -->
 
   <label>With bootstrap class</label>
   <input type="text" id="txt" class="form-control time-input mb-2" value="23:59" />
@@ -93,7 +93,8 @@
           isNumber: ((event.which >= 48 && event.which <= 57) || /^\d$/.test(event.key)),
           isCopyPaste: (event.ctrlKey||event.metaKey) && [67,86].includes(event.which),
           isSelectAll: (event.ctrlKey||event.metaKey) && event.which === 65,
-          isRestrictedKey : event.shiftKey || event.altKey || (event.ctrlKey||event.metaKey)
+          isRestrictedKey : event.shiftKey || event.altKey || (event.ctrlKey||event.metaKey),
+          isTab : event.which === 9,
         }
         return allowedKeys;
       }
@@ -101,8 +102,8 @@
       //function that handles the keydown event and process the keypress
       let HandleInput = (element, event) => {
         debugger
-        const { isArrow, isBackspace, isNumber ,isCopyPaste , isSelectAll , isRestrictedKey} = keysAllowed(event);
-        if(isCopyPaste || isSelectAll) return true
+        const { isArrow, isBackspace, isNumber ,isCopyPaste , isSelectAll , isRestrictedKey,isTab} = keysAllowed(event);
+        if(isCopyPaste || isSelectAll || isTab) return true
         const pos = element.selectionStart;
 
         if (!isArrow || isRestrictedKey) {
@@ -202,7 +203,6 @@
   })(jQuery);
 
   //#endregion
-
 
   //initializing input element/s
   $('.time-input').initTimeInput();
